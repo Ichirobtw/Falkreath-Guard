@@ -13,8 +13,8 @@ module Utility
         end
 
         def call
-          previous_page_button_handler = previous_page_button
-          next_page_button_handler = next_page_button
+          previous_page_button_handler = create_previous_page_button
+          next_page_button_handler = create_next_page_button
 
           Thread.new do
             sleep TEN_MINUTES
@@ -27,7 +27,7 @@ module Utility
 
         attr_reader :embed_builder, :pagination_key, :bot
 
-        def previous_page_button
+        def create_previous_page_button
           bot.button(custom_id: "#{pagination_key}-previous") do |event|
             page = embed_builder.current_page == 1 ? embed_builder.total_pages : embed_builder.current_page - 1
 
@@ -36,7 +36,7 @@ module Utility
           end
         end
 
-        def next_page_button
+        def create_next_page_button
           bot.button(custom_id: "#{pagination_key}-next") do |event|
             page = embed_builder.current_page == embed_builder.total_pages ? 1 : embed_builder.current_page + 1
 
