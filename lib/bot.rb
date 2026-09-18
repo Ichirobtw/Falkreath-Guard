@@ -16,11 +16,10 @@ class Bot
       unregister_flag_set?(args) ? unregister_commands(args) : initialize_commands
       initialize_leveling
       register_events
+      initialize_misc
 
       @running = true
     end
-
-    initialize_misc
 
     bot.run
   end
